@@ -85,19 +85,11 @@ const TestConfig fiberConfigDownload = {
         950000,    // inc_size
         65536,     // buff_size
         20000,     // min_test_time_ms
-        32,        // concurrency
+        64,        // concurrency
         "Fiber / Lan line type detected: profile selected fiber"
 };
 
-const TestConfig fiberConfigUpload = {
-        1000000,  // start_size
-        70000000, // max_size
-        250000,   // inc_size
-        65536,    // buff_size
-        20000,    // min_test_time_ms
-        12,       // concurrency
-        "Fiber / Lan line type detected: profile selected fiber"
-};
+const TestConfig fiberConfigUpload = fiberConfigDownload;
 
 void testConfigSelector(const double preSpeed, TestConfig& uploadConfig, TestConfig& downloadConfig){
     uploadConfig   = slowConfigUpload;

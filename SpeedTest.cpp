@@ -35,10 +35,18 @@ bool SpeedTest::ipInfo(IPInfo& info) {
     if (code == CURLE_OK){
         auto values = SpeedTest::parseQueryString(oss.str());
         mIpInfo = IPInfo();
-        mIpInfo.ip_address = values["ip_address"];
-        mIpInfo.isp = values["isp"];
-        mIpInfo.lat = std::stof(values["lat"]);
-        mIpInfo.lon = std::stof(values["lon"]);
+        auto valueItr = values.find("ip_address");
+        mIpInfo.ip_address = valueItr != values.end() ? valueItr->second : "";
+
+        valueItr = values.find("isp");
+        mIpInfo.isp = valueItr != values.end() ? valueItr->second : "";
+
+        valueItr = values.find("lat");
+        mIpInfo.lat = valueItr != values.end() ? std::stof(valueItr->second) : NAN;
+
+        valueItr = values.find("lon");
+        mIpInfo.lon = valueItr != values.end() ? std::stof(valueItr->second) : NAN;
+
         values.clear();
         oss.clear();
         info = mIpInfo;
